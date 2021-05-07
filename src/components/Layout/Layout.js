@@ -7,7 +7,7 @@ import styles from "./Layout.module.css";
 const Layout = ({ children, title = "World Ranks" }) => {
   const [theme, setTheme] = useState("light");
   useEffect(() => {
-    if (!localStorage.getItem("theme")) localStorage.set("theme", theme);
+    if (!localStorage.getItem("theme")) localStorage.setItem("theme", theme);
     document.documentElement.setAttribute(
       "data-theme",
       localStorage.getItem("theme")
