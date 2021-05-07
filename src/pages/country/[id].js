@@ -72,9 +72,7 @@ const Country = ({ country }) => {
             </div>
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Region</div>
-              <div className={styles.details_panel_value}>
-                {country.region}
-              </div>
+              <div className={styles.details_panel_value}>{country.region}</div>
             </div>
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Subregion</div>
@@ -117,7 +115,22 @@ const Country = ({ country }) => {
 
 export default Country;
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticPaths = async () => {
+  const res = await fetch("https://restcountries.eu/rest/v2/all");
+  const countries = await res.json();
+
+  const paths = countries.map(({ alpha3Code }) => ({
+    params: {
+      id: alpha3Code,
+    },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async ({ params }) => {
   const country = await getCountryById(params.id);
   return {
     props: { country },
