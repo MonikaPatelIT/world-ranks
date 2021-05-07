@@ -27,7 +27,7 @@ export default function Home({ countries }) {
           />
           <div className={styles.counts}>
             {" "}
-            Found {countries.length} countries
+            Found {filteredCountries.length} countries
           </div>
         </div>
       </div>
