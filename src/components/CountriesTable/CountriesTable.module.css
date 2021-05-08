@@ -63,6 +63,7 @@
 
 .flag img {
   width: 100%;
+  box-shadow: var(--img-box-shadow);
 }
 .name {
   text-align: left;

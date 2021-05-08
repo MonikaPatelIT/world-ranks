@@ -1,10 +1,11 @@
 .container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 24px;
-  }
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+}
 
 .overview_panel img {
+  box-shadow: var(--img-box-shadow);
   width: 100%;
   border-radius: 4px;
 }
@@ -73,6 +74,7 @@
 .details_panel_borders img {
   width: 100%;
   border-radius: 4px;
+  box-shadow: var(--img-box-shadow);
 }
 
 .details_panel_borders_country {
@@ -99,6 +101,6 @@
     grid-column: 1 / span 4;
   }
   .container_right {
-      grid-column: 5/span 8;
+    grid-column: 5 / span 8;
   }
 }
