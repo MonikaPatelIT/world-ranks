@@ -18,8 +18,9 @@ const Country = ({ country }) => {
   };
 
   useEffect(() => {
+    console.log(country.name);
     getBorders();
-  }, []);
+  }, [country]);
 
   return (
     <Layout title={country.name}>
@@ -32,13 +33,13 @@ const Country = ({ country }) => {
             <div className={styles.overview_numbers}>
               <div className={styles.overview_population}>
                 <div className={styles.overview_value}>
-                  {country.population}
+                  {country.population || 0 }
                 </div>
                 <div className={styles.overview_label}>Population</div>
               </div>
               <div className={styles.overview_area}>
                 <div className={styles.overview_value}>{country.area}</div>
-                <div className={styles.overview_label}>Area</div>
+                <div className={styles.overview_label || 0}>Area</div>
               </div>
             </div>
           </div>
@@ -49,7 +50,7 @@ const Country = ({ country }) => {
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Capital</div>
               <div className={styles.details_panel_value}>
-                {country.capital}
+                {country.capital || 'NA'}
               </div>
             </div>
             <div className={styles.details_panel_row}>
@@ -67,45 +68,45 @@ const Country = ({ country }) => {
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Native name</div>
               <div className={styles.details_panel_value}>
-                {country.nativeName}
+                {country.nativeName || 'NA'}
               </div>
             </div>
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Region</div>
-              <div className={styles.details_panel_value}>{country.region}</div>
+              <div className={styles.details_panel_value}>{country.region || 'NA'}</div>
             </div>
             <div className={styles.details_panel_row}>
               <div className={styles.details_panel_label}>Subregion</div>
               <div className={styles.details_panel_value}>
-                {country.subregion}
+                {country.subregion || 'NA'}
               </div>
             </div>
 
-            {country.gini && (
               <div className={styles.details_panel_row}>
                 <div className={styles.details_panel_label}>Gini</div>
                 <div className={styles.details_panel_value}>
-                  {country.gini}%
+                  {country.gini || 0}%
+                </div>
+              </div>
+            {borders.length > 0 && (
+              <div className={styles.details_panel_borders}>
+                <div className={styles.details_panel_borders_label}>
+                  Neighbouring Countries
+                </div>
+                <div className={styles.details_panel_borders_container}>
+                  {borders.map(({ flag, name, alpha3Code }, index) => (
+                    <Link href={`/country/${alpha3Code}`} key={index}>
+                      <div className={styles.details_panel_borders_country}>
+                        <img src={flag} alt={name} />
+                        <div className={styles.details_panel_borders_name}>
+                          {name}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}
-            <div className={styles.details_panel_borders}>
-              <div className={styles.details_panel_borders_label}>
-                Neighbouring Countries
-              </div>
-              <div className={styles.details_panel_borders_container}>
-                {borders.map(({ flag, name, alpha3Code }, index) => (
-                  <Link href={`/country/${alpha3Code}`} key={index}>
-                    <div className={styles.details_panel_borders_country}>
-                      <img src={flag} alt={name} />
-                      <div className={styles.details_panel_borders_name}>
-                        {name}
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
